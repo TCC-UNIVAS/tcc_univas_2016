@@ -51,10 +51,6 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
       zoom: 13
     },
     events: {
-      // map: {
-      //   enable: ['click','contextmenu'],
-      //   logic: 'emit'
-      // }
     },
     //this tile is needed to render the map when the app start, otherwise the map stay blank
     tiles: {
@@ -62,41 +58,43 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
     }
   });
 
-
   $scope.markers = new Array();
 
   //when the tag "leaflet" have an ID use the follow syntax to get an event: <sourceObjectType>.<leafletId>.<eventName>
   //when it hasn't any ID use the follow syntax: <sourceObjectType>.<eventName>
   $scope.$on("leafletDirectiveMap.map.click", function(event,args) {
+    $scope.description = {text: ''};
     var myPopup = $ionicPopup.show({
-     title: 'Entre com os dados:',
-     template: '<h5> Descrição</h5>' +
-               '<input type="text" ng-model="description">',
+      templateUrl: 'form.html',
+      title: 'Entre com os dados:',
       scope: $scope,
       buttons: [
         {
-          text: 'Cancela',
+          text: 'Cancel',
           type: 'button-default',
           onTap: function () {
             myPopup.close();
+            return false;
           }
         },
         {
-          text: '<b>Confirma</b>',
+          text: '<b>Confirm</b>',
           type: 'button-positive',
           onTap: function (e) {
-            //console.log('tap');
-            if (!$scope.description) {
-              //don't allow the user to close unless he enters wifi password
+            console.log($scope.description.text);
+
+            if (!$scope.description.text) {
+              //don't allow the user to close unless he enters some description
               e.preventDefault();
             } else {
               var leafEvent = args.leafletEvent;
+              //console.log(leafEvent);
               $scope.markers.push({
                   lat: leafEvent.latlng.lat,
                   lng: leafEvent.latlng.lng,
-                  message: scope.description
+                  message: $scope.description
               });
-              return $scope.description;
+              return 'confirm';
             }
           }
         }
