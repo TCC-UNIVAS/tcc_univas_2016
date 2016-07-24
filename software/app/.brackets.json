@@ -1,0 +1,13 @@
+{
+    "jscodehints.detectedExclusions": [
+        "C:/Users/Ricardo/Desktop/ionic/myApp/plugins/cordova-plugin-device/src/tizen/DeviceProxy.js",
+        "C:/Users/Ricardo/Desktop/ionic/myApp/plugins/cordova-plugin-device/src/ubuntu/device.js",
+        "C:/Users/Ricardo/Desktop/ionic/myApp/plugins/cordova-plugin-device/src/windows/DeviceProxy.js",
+        "C:/Users/Ricardo/Desktop/ionic/myApp/plugins/cordova-plugin-device/tests/tests.js",
+        "C:/Users/Ricardo/Desktop/ionic/myApp/plugins/cordova-plugin-device/www/device.js",
+        "C:/Users/Ricardo/Desktop/ionic/myApp/plugins/cordova-plugin-splashscreen/src/blackberry10/index.js",
+        "C:/Users/Ricardo/Desktop/ionic/myApp/plugins/cordova-plugin-splashscreen/src/browser/SplashScreenProxy.js",
+        "C:/Users/Ricardo/Desktop/ionic/myApp/plugins/cordova-plugin-splashscreen/src/tizen/SplashScreenProxy.js",
+        "C:/Users/Ricardo/Desktop/ionic/myApp/plugins/cordova-plugin-splashscreen/tests/tests.js"
+    ]
+}
