@@ -50,8 +50,7 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
       lng : -45.929177,
       zoom: 13
     },
-    events: {
-    },
+    events: { },
     //this tile is needed to render the map when the app start, otherwise the map stay blank
     tiles: {
       url: 'https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicmljYXJkby1mYXJpYSIsImEiOiJjaXB4ZXA2ZXkwd3FyZmptMm4zZ3JnOGI4In0.Md-nC4l8kf5vwur-fDJPJg'

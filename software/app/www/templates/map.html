@@ -2,11 +2,11 @@
   <ion-content>
 
     <div ng-controller="MapCtrl" >
-      <leaflet id="map"  markers="markers" events="events" event-broadcast="events" lf-center="PA" tiles="tiles"></leaflet>
+      <leaflet id="map"  data-tap-disabled="true" markers="markers" events="events" event-broadcast="events" lf-center="PA" tiles="tiles"></leaflet>
     </div>
 
 
-    <!--this script will appear in the form....it's wierd, but works!!!-->
+    <!--this script will appear in the form....it's weird, but works!!!-->
     <script id="form.html" type="text/ng-template">
       <h5>Descrição</h5>
       <input ng-model="description.text" type="text">
