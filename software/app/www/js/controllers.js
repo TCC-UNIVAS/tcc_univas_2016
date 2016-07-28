@@ -43,7 +43,7 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
 
 
  //to render the map
-.controller('MapCtrl', ['$scope','$ionicPopup', function($scope, $ionicPopup){
+.controller('MapCtrl', ['$scope','$ionicPopup', '$http', function($scope, $ionicPopup, $http){
   angular.extend($scope, {
     PA: {
       lat : -22.242285,
@@ -59,11 +59,21 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
 
   $scope.markers = new Array();
 
+  //get all markers from the server
+  //the response have an markers json
+  $http.get('myURL/marker').success(function(res){
+    angular.forEach(res, function (markers) {
+      $scope.markers.push(markers);
+    });
+  }).error(function(err){
+    console.log('An error occurred try again! ' + err);
+  });
+
   //when the tag "leaflet" have an ID use the follow syntax to get an event: <sourceObjectType>.<leafletId>.<eventName>
   //when it hasn't any ID use the follow syntax: <sourceObjectType>.<eventName>
   $scope.$on("leafletDirectiveMap.map.click", function(event,args) {
     $scope.description = {text: ''};
-    var myPopup = $ionicPopup.show({
+    $scope.myPopup = $ionicPopup.show({
       templateUrl: 'form.html',
       title: 'Entre com os dados:',
       scope: $scope,
@@ -72,7 +82,7 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
           text: 'Cancel',
           type: 'button-default',
           onTap: function () {
-            myPopup.close();
+            $scope.myPopup.close();
             return false;
           }
         },
@@ -93,13 +103,19 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
                   lng: leafEvent.latlng.lng,
                   message: $scope.description
               });
+              $http.post('myURL/Marker',$scope.markers[$scope.markers.length - 1]).success(function(response){
+                console.log('ok - ' + response);
+              }).error(function(err){
+                console.log('An error occurred try again! ' + err);
+                $scope.markers.pop();
+              });
               return 'confirm';
             }
           }
         }
       ]
     });
-    myPopup.then(function (res) {
+    $scope.myPopup.then(function (res) {
       console.log('Tapped!', res);
     });
 
