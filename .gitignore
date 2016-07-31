@@ -32,7 +32,7 @@ coverage
 build/Release
 
 # Dependency directories
-software/app/node_modules
+software/server/node_modules
 jspm_packages
 
 # Optional npm cache directory
@@ -47,7 +47,7 @@ bower_components
 software/app/.bower-cache
 software/app/.bower-registry
 software/app/.bower-tmp
-
+software/app/www/lib
 
 ### WebStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm

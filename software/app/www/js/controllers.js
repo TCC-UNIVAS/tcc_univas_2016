@@ -43,7 +43,9 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
 
 
  //to render the map
-.controller('MapCtrl', ['$scope','$ionicPopup', '$http', function($scope, $ionicPopup, $http){
+.controller('MapCtrl', ['$scope','$ionicPopup', '$http','$window','leafletData', function($scope, $ionicPopup, $http, $window, leafletData){
+  //document.getElementById("map").setAttribute("style","width:window.innerWidth");
+  //document.getElementById("map").setAttribute("style","height:window.innerHeight");
   angular.extend($scope, {
     PA: {
       lat : -22.242285,
@@ -57,11 +59,13 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
     }
   });
 
+  
+
   $scope.markers = new Array();
 
   //get all markers from the server
   //the response have an markers json
-  $http.get('myURL/marker').success(function(res){
+  $http.get('http://localhost:3000/marker').success(function(res){
     angular.forEach(res, function (markers) {
       $scope.markers.push(markers);
     });
@@ -101,9 +105,10 @@ angular.module('starter.controllers', ['ionic','leaflet-directive'])
               $scope.markers.push({
                   lat: leafEvent.latlng.lat,
                   lng: leafEvent.latlng.lng,
-                  message: $scope.description
+                  message: $scope.description.text
               });
-              $http.post('myURL/Marker',$scope.markers[$scope.markers.length - 1]).success(function(response){
+              var marker = $scope.markers[$scope.markers.length - 1];
+              $http.post('http://localhost:3000/marker', marker).success(function(response){
                 console.log('ok - ' + response);
               }).error(function(err){
                 console.log('An error occurred try again! ' + err);
